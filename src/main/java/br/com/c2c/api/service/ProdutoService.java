@@ -42,4 +42,12 @@ public class ProdutoService {
 
         return Optional.of(produtoRepository.save(optionalProduto.get()));
     }
+
+    public boolean deletaProduto(Integer id){
+        if(produtoRepository.existsById(id)){
+            produtoRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }
