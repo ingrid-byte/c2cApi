@@ -1,5 +1,6 @@
 package br.com.c2c.api.controller;
 
+import br.com.c2c.api.dto.EmailValidoDTO;
 import br.com.c2c.api.entity.Usuario;
 import br.com.c2c.api.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,14 @@ public class UsuarioController {
             return ResponseEntity.ok(optionalUsuario.get());
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/{usuario}/email/{email}/valido")
+    public ResponseEntity<EmailValidoDTO> buscaProdutoPorId(@PathVariable("usuario") Integer id,
+                                                     @PathVariable("email") String email){
+        EmailValidoDTO emailValidoDTO = usuarioService.validaEmail(id, email);
+
+        return ResponseEntity.ok(emailValidoDTO);
     }
 
     @PutMapping("/{usuario}")

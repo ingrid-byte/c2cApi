@@ -1,5 +1,6 @@
 package br.com.c2c.api.service;
 
+import br.com.c2c.api.dto.EmailValidoDTO;
 import br.com.c2c.api.entity.Produto;
 import br.com.c2c.api.entity.Usuario;
 import br.com.c2c.api.repository.UsuarioRepository;
@@ -48,5 +49,15 @@ public class UsuarioService {
             return true;
         }
         return false;
+    }
+
+    public EmailValidoDTO validaEmail(Integer id, String email){
+        Usuario usuario = usuarioRepository.buscaUsuarioPorEmailEId(id, email);
+        EmailValidoDTO emailValidoDTO = new EmailValidoDTO();
+        emailValidoDTO.setEmail(email);
+        if(usuario != null){
+            emailValidoDTO.setValido(true);
+        }
+        return emailValidoDTO;
     }
 }
